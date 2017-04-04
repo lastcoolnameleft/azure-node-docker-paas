@@ -15,6 +15,7 @@ You do not need to be an Node.js or JavaScript expert for the coding part but yo
 
 The basic overall flow is:
 * Blah
+* xxxx
 
 ---
 
@@ -53,40 +54,35 @@ It is recommended you paste the VSTS account name and Azure subscription ID to a
 # Main Exercise Flow
 With all the setup complete, what follows is the full step by step guide to the exercise 
 
-## 1. Create .NET Core MVC webapp
-First of all we'll create our .NET Core application project and source code. The .NET Core SDK uses the Yeoman templating system and comes with several built-in templates to get you started quickly. Open a command prompt or terminal and run the following commands:
+## 1. Create Node.js / Express web app
+xxxx
+Open a command prompt or terminal and run the following commands:
 ```
-mkdir mywebapp
-cd mywebapp
-dotnet new mvc
+npm install express-generator -g
+express --view=pug myapp
+cd myapp
+npm install
 ```
-If this is the first time running the dotnet command it will take a minute to decompress and cache some stuff.  
-> Note. You can call the folder anything you like, but if you change it, the Dockerfile we create later needs to reflect that change
+
+> Note. You can call the app folder anything you like
 
 Now open your project folder in VS Code
 ```
 code .
 ```
-Take a look around, you'll see we have a fully functional ASP.NET Core MVC application with views, controllers and static HTML/CSS content all created for us.
+Take a look around, xxxx
 
 
 ## 2. Modify application webserver behavior 
-Open **Program.cs** and two prompts will appear, neither are critical but click 'Yes' to the add assets prompt, and 'Close' for the dependencies prompt  
-Insert the following after the `UseKestrel()` line (note there is no semicolon!) :
-```csharp
-.UseUrls("http://*:5000")
-```
-.NET Core doesn't require IIS and comes with a built-in webserver called Kestrel, by default Kestrel binds to the loopback adapter and we want it to listen on all IPs. Non-coders don't panic, this is the only real code change we need to make.
-> Note. This change is not important now, but _critical_ later when the app is running inside a Docker container
+
 
 
 ## 3. Run and tailor your application
 Let's take a look at our app and make sure it runs. In VS Code hit `Ctrl+'` or switch back to your cmd/terminal window, then run: 
 ```
-dotnet restore
-dotnet run
+npm start
 ```
-.NET Core is much more lightweight than old legacy .NET, the `dotnet restore` command pulls down the packages it requires to run our app and nothing more. If you have worked with Node.js it is similar to the "npm install" step. 
+
 
 Open a browser and go to [`http://localhost:5000`](http://localhost:5000) to see your app. You should see the standard generated website that the SDK has created. It's not very interesting, so let's make it more personal...
 
@@ -174,36 +170,6 @@ Docker support in VSTS is enabled via an extension on the VSTS marketplace
 * Open this link in a new tab: [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscs-rm.docker) and click "Install"
 
 
-## 8. Point Docker client at remote host
-Hopefully the `docker-machine create` command we fired off earlier has completed (and successfully!) if not, go grab a quick coffee.  
-We need some way to interact with our new Docker host, and Docker machine makes this easy, by quickly setting a bunch of environment variables which "points" your Docker client at the new host. There's no need to connect via SSH or anything messy, simply run:
-```
-docker-machine env dockerhost
-```
-
-This will spit out a bunch of stuff but the last line is what you need to copy & paste and run, it should look like:
-```
-@FOR /f "tokens=*" %i IN ('docker-machine env dockerhost') DO @%i
-```
-or on Mac/Linux
-```
-eval "$(docker-machine env dockerhost)"
-```
-
-What has this done? It has set several environmental variables used by the docker client, now if you issue any `docker` command on your machine it will be run on the remote Docker host running in Azure. And this is why we don't need the whole Docker engine installed locally on your machine. Neat!  
-
-Let's run a quick `docker ps` and/or `docker run hello-world` to verify everything is OK. You should get no errors
-
-
-## 9. Run VSTS agent as Docker container
-We'll now spin up a VSTS agent, this will serve two purposes; to do our .NET code compile/publish, but also build our Docker image. We'll run it as a container which then gives us access to the parent Docker host.  
-To run the agent as container in the Docker host you just created, run this command:
-```bash 
-docker run -e VSTS_WORK='/var/vsts/$VSTS_AGENT' -v /var/vsts:/var/vsts -v /var/run/docker.sock:/var/run/docker.sock -e VSTS_ACCOUNT=%VSTS_ACCT% -e VSTS_TOKEN=%VSTS_PAT% -e VSTS_POOL=DockerAgents -d microsoft/vsts-agent:latest
-```
-You will need to manually substitute `%VSTS_PAT%` and `%VSTS_ACCT%` (unless you have them set as environmental vars). You should have made a note of these at the beginning of the scenario
-
-This might take about a minute to pull the image from Dockerhub and to fire up. You can check it has worked in the VSTS "Agent Queues" view, and check the *DockerAgents* pool/queue, the agent should eventually appear and turn green, the name will be gibberish BTW (if this annoys you can name it with `-e VSTS_AGENT=Foobar`). If it doesn't appear, run `docker ps` and check if the container is running, if not check your command and parameters.
 
 
 ## 10. Create build definition

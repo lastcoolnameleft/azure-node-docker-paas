@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Dockerized Node.js app in Azure' });
+  res.render('index', { title: 'Demo App' });
 });
 
 module.exports = router;
