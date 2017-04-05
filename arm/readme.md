@@ -3,7 +3,7 @@
 ## Overview
 
 Use supplied [azuredeploy.json](azuredeploy.json) template to deploy our resources into Azure, a simple way to do this is click this button:  
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbenc-uk%2Fazure-iot-demo%2Fmaster%2Fazuredeploy.json" target="_newdeploy"><img align="middle" src="http://azuredeploy.net/deploybutton.png"/></a>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgithub.com%2Fbenc-uk%2Fazure-node-docker-paas%2Fblob%2Fmaster%2Farm%2Fazuredeploy.json" target="_newdeploy"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 
 ## Resources Deployed
 * Azure Container Registry
