@@ -4,7 +4,8 @@
 
 Use supplied [azuredeploy.json](azuredeploy.json) template to deploy the resources we need into Azure. An easy way to do this is via the Azure portal, simply click this button:  
   
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbenc-uk%2Fazure-node-docker-paas%2Fmaster%2Farm%2Fazuredeploy.json" target="_blank"><img height='60px' src="https://raw.githubusercontent.com/benc-uk/azure-node-docker-paas/master/arm/azuredeploy.png"/></a>  
+[![deploy](azuredeploy.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbenc-uk%2Fazure-node-docker-paas%2Fmaster%2Farm%2Fazuredeploy.json)
+
 (Note. Best to right click and open in new tab)
 
 ## Resources Deployed
