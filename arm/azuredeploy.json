@@ -3,11 +3,11 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "siteName": {
-            "defaultValue": "demowebapp",
+            "defaultValue": "",
             "type": "String"
         },
         "registryName": {
-            "defaultValue": "demoregistry",
+            "defaultValue": "",
             "type": "String"
         },
         "dockerImageName": {
