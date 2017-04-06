@@ -15,7 +15,7 @@ Use supplied [azuredeploy.json](azuredeploy.json) template to deploy the resourc
 
 ## Parameters
 The template will prompt you for several parameters:
-* `siteName` : The name of your web app, **Note: this must be globally unique!** 
-* `registryName` : The name of your docker registry, **Note: this must be globally unique!** 
+* `siteName` : The name of your web app, **Note: This must be globally unique as it is registered in DNS** 
+* `registryName` : The name of your docker registry, **Note: This must be globally unique as it is registered in DNS**  
 * `dockerImageName` : The name of your application Docker image 
 * `dockerImagePort` : Port your application listens on
