@@ -7,11 +7,6 @@ Use supplied [azuredeploy.json](azuredeploy.json) template to deploy the resourc
 [![deploy](azuredeploy.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbenc-uk%2Fazure-node-docker-paas%2Fmaster%2Farm%2Fazuredeploy.json)  
 (Tip. Right click and open in new tab)
 
-
-<a href="https://azuredeploy.net/?repository=https://github.com/benc-uk/azure-node-docker-paas/tree/master/arm" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
-
 ## Resources Deployed
 * Azure Container Registry
 * Linux App Service Plan
