@@ -85,7 +85,7 @@ npm start
 ```
 This will start the Node/Express app + webserver which will be listening on port 3000, so open [`http://localhost:3000`](http://localhost:3000) in your browser to see your app.  
 
-Looks pretty dull eh? It's not the most exciting starting page for sure. If you go back to VS Code and open `views/index.pug` you can change what your app shows. This file is a view layout in a format called 'Pug', which has a special format like a very minimal HTML, you can find out the basics [here](https://www.sitepoint.com/jade-tutorial-for-beginners/). This is an example:
+Looks pretty dull eh? It's not the most exciting starting page for sure. If you go back to VS Code and open ***views/index.pug*** you can change what your app shows. This file is a view layout in a format called 'Pug', which has a special format like a very minimal HTML, you can find out the basics [here](https://www.sitepoint.com/jade-tutorial-for-beginners/). This is an example:
 ```pug
 extends layout
 
@@ -95,14 +95,10 @@ block content
   h3 Let's run this in Azure with Docker
   button OK Great!
 ```
+Any changes to Pug views are picked up without needing to restart Node, so just refresh the browser.  
+How much you want to personalize and tweak it from here is up to you. If you know CSS then some quick edits to ***public/stylesheets/style.css*** can make things less of an eyesore.  
 
-
-How much you want to personalize and tweak it is up to you. 
-
-
-## 2. Modify application webserver behavior 
-
-
+Once you you're happy move on to the next step, press `Ctrl+C` in your VS Code terminal to stop Node from running.
 
 ---
 
