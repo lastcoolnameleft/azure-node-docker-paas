@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     mem: os.totalmem()
   }
 
-  res.render('index', { title: 'AZure Demo App', info: info });
+  res.render('index', { title: 'Azure Demo App', info: info });
 });
 
 module.exports = router;
