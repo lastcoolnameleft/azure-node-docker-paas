@@ -1,7 +1,21 @@
 extends layout
 
 block content
-  h1 Linux PaaS - Demo Web App
-  h3 Microsoft &hearts; Open source
-  h3 Let's run this in Azure with Docker
-  button OK Great!
+  h1 
+    img(src='images/icon.png' height='64px' align='absmiddle')
+    span &nbsp;Linux PaaS &ndash; Demo Web App
+  h2 System Info...
+  table 
+    tr 
+      td OS: 
+      td #{info.type} &ndash; v#{info.release}
+    tr
+      td Hostname:
+      td #{info.hostname} 
+    tr
+      td CPUs: 
+      td #{info.cpus.length} &times; #{info.cpus[0].model}
+    tr
+      td Memory: 
+      td #{Math.round(info.mem/(1024*1024))} Mb
+  h2 Azure &hearts; Open source
