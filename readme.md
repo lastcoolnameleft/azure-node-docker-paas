@@ -12,8 +12,8 @@ The scenario will cover:
 
 You do not need to be an Node.js or JavaScript expert for the coding part but you will need to make basic changes to a JS file. Likewise no prior experience with VSTS and Azure is required (but obviously beneficial). We will also spend some time with Docker registries and image building & tagging. You will be able to complete the lab with either a Windows or Mac machine, but only Windows has been tested.
 
-The basic overall flow is:
-* Create basic Node.js Express app
+The high level overall flow is:
+* Generate Node.js Express app
 * Add Docker support
 * Git repo setup
 * Deploy resources in Azure from template
@@ -40,21 +40,15 @@ You will need the following things set up and installed on your machine:
 * Install git; [Git for Windows](https://git-scm.com/download/win) or [Git for Mac](https://git-scm.com/download/mac)
 * Optional but strongly recommended: [Git credential manager](https://www.visualstudio.com/en-us/docs/git/set-up-credential-managers)
 
-
 ## Initial Setup Steps
 Overview of steps:
- 1. Create a new VSTS account (or new project if you already have an account)
- 3. Make a note of your Azure subscription ID
- 5. Make a note of your VSTS account name, e.g. `{account_name}.visualstudio.com`
- 6. If you've never run git before, run these commands (modifying with your details as required):
+ * Create a new VSTS account (or new project if you already have an account)
+ * If you've never run git before, run these commands (modifying with your details as required):
  ```
 git config --global user.email "your-email@example.com"
 git config --global user.name "Your Name"
 git config --global credential.helper manager
 ```
-> #### For detailed instructions of these steps with screenshots [click here](setup/)
-
-It is recommended you paste the VSTS account name and Azure subscription ID to a scratchpad file somewhere.
 
 ---
 
@@ -70,7 +64,7 @@ express --view=pug myapp
 cd myapp
 npm install
 ```
-This will install the Express generator, then create a new app and folder called 'myapp', then install the Node modules required.
+This will use NPM (Node Package Manager) to install the Express generator, then create a new app and folder called 'myapp', then install the Node modules required.
 > Note. You can call the app folder anything you like, you don't need to call it 'myapp'
 
 Now open your project folder in VS Code
@@ -99,6 +93,41 @@ Any changes to Pug views are picked up without needing to restart Node, so just 
 How much you want to personalize and tweak it from here is up to you. If you know CSS then some quick edits to ***public/stylesheets/style.css*** can make things less of an eyesore.  
 
 Once you you're happy move on to the next step, press `Ctrl+C` in your VS Code terminal to stop Node from running.
+
+
+## 2. Containerize the app 
+Now we'll add Docker support to the app to containerize it. The Docker extension for VS Code makes this super easy.  
+* Press `Ctrl+Shift+P` then type "docker"
+* Select 'Add docker files to workspace'
+* Choose 'Node.js' for application platform
+* Choose '3000' for the port (no quotes)
+
+This will add three files to your project, the two compose YAML files we can ignore. The **Dockerfile** is what we're interested in. We don't need to make any changes but if you're unfamiliar with Docker, it's worth opening and looking at, if you've created Docker images before, then move on.  
+- Since, a Docker image is nothing but a series of layers built on top of each other, you nearly always start from a base image. The `FROM` command sets the base image, here we're using an image pre-built with Node.js. This is an official image published by the Node foundation and [hosted on Dockerhub](https://hub.docker.com/_/node/).  
+- The `COPY` and `RUN` commands go about running the `npm install` just as we did earlier and also copying in your app source into the image.  
+- The `EXPOSE` command is a hint which ports your application and will be listening on and need to be mapped out to the container when it runs.  
+- The last `CMD` command is what starts the app up, just as we did with `npm start`.  
+
+
+## 3. Create git repo and push to VSTS
+To start to get a CI/CD pipeline going we need our code in source control so let's create a git repo and add out code to it. You can do this from the source control view in VS Code; the branch icon on the lefthand toolbar (also `Ctrl+Shift+G`) or from the integrated terminal run:
+```
+git init
+git add .
+git commit -m "First commit"
+```
+To get the code up into VSTS, we'll need to set the remote origin for the repo and push it, 
+> Note. You will get the correct URL & syntax for this part by expanding the *"push an existing repository from command line"* section of the project start page or from the 'code' section
+```
+git remote add origin https://{vsts_account}.visualstudio.com/_git/{project}
+git push -u origin --all
+```
+If you have the git credential manager installed, authentication should should automatically pop up, so login with your VSTS account details.  
+If you have trouble and you get username/password prompt at the command line, you have the option of manually creating git credentials by going into *VSTS --> Code --> Generate Git credentials*
+
+
+## 4. Deploy resources to Azure
+
 
 ---
 

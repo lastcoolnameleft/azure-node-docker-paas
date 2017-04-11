@@ -1,4 +1,4 @@
-# Initial Setup Steps for Azure DevOps Lab with .NET Core, Docker and VSTS
+# Initial Setup Steps for Azure DevOps Lab with Node.js, Docker and VSTS
 
 These are more detailed steps for the setup tasks with screenshots
 

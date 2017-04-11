@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const os = require('os');
+const fs = require('fs');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -13,7 +14,7 @@ router.get('/', function (req, res, next) {
     mem: os.totalmem()
   }
 
-  res.render('index', { title: 'Azure Demo App', info: info });
+  res.render('index', { title: 'Azure Demo App', info: info, isDocker: fs.existsSync('/.dockerenv') });
 });
 
 module.exports = router;
