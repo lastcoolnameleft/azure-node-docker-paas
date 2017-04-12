@@ -20,13 +20,21 @@ block content
     tr
       td Memory: 
       td #{Math.round(info.mem/(1024*1024))} Mb
+  if isDocker
+    h3 Status: Running in a Docker container! &#x1F604; &#x2615; 
+  else
+    h3 Status: <b>Not</b> running as a Docker container &#x1F622;
+  hr
   h2 Azure &hearts; Open source
 ```
+
+
 ## index.js 
 ```js
 var express = require('express');
 var router = express.Router();
 const os = require('os');
+const fs = require('fs');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -39,11 +47,13 @@ router.get('/', function (req, res, next) {
     mem: os.totalmem()
   }
 
-  res.render('index', { title: 'Azure Demo App', info: info });
+  res.render('index', { title: 'Azure Demo App', info: info, isDocker: fs.existsSync('/.dockerenv') });
 });
 
 module.exports = router;
 ```
+
+
 ## style.css 
 ```css
 body {
