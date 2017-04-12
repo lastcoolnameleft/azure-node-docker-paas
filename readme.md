@@ -133,7 +133,16 @@ Switching from VSTS to Azure for a moment, we'll set about creating the cloud re
 * Linux Web App
 * Storage Account
 
-Go into the [ARM folder under this repository](arm/) and you should see a page with big blue button which will
+There are many ways to deploy this template, but we'll use a simple "Deploy to Azure" button and URL. Go into the [ARM folder under this repository](arm/) and you should see a page with big blue button which will jump into the Azure portal ready to deploy our template. You will be prompted for a number of things: 
+* *Resource group* - This group will hold all your resources. Choose any name you like
+* *Location* - Pick a local Azure region e.g. North or West Europe or one of the UK regions
+* *Site Name* - This is the name of your new site and Linux web app, :warning: Important! Pick a globally unique name as this site will be registered in global DNS. Use your initials and/or date, e.g. *`node-demo-bc-1204`*
+* *Registry Name* - This is the name of your new Docker registry, same as above *must be globally unique name!* and only use letters and numbers
+* *Docker Image Name* - Leave this as `myapp` for now
+* *Docker Image Port* - Leave this as `3000`for now
+
+Tick the 'I agree to the terms and conditions stated above' checkbox. If you've never used the Azure portal before, I also advise ticking the 'Pin to dashboard' option too. Then click 'Purchase' to start deployment.  
+Deployment should take about 1 minute
 
 ---
 
