@@ -102,22 +102,22 @@ Now we'll add Docker support to the app to containerize it. The Docker extension
 * Choose 'Node.js' for application platform
 * Choose '3000' for the port (no quotes)
 
-This will add three files to your project, the two compose YAML files we can ignore. The **Dockerfile** is what we're interested in. We don't need to make any changes but if you're unfamiliar with Docker, it's worth opening and looking at, if you've created Docker images before, then move on.  
+This will add three files to your project, the two compose YAML files we can ignore. The **Dockerfile** is what we're interested in. We don't need to make any changes but if you're unfamiliar with Docker, it's worth opening and looking at, if you've created Docker images before, then move on. Some explanation of the **DockerFile**:  
 - Since, a Docker image is nothing but a series of layers built on top of each other, you nearly always start from a base image. The `FROM` command sets the base image, here we're using an image pre-built with Node.js. This is an official image published by the Node foundation and [hosted on Dockerhub](https://hub.docker.com/_/node/).  
-- The `COPY` and `RUN` commands go about running the `npm install` just as we did earlier and also copying in your app source into the image.  
+- The series of `COPY` and `RUN` commands go about running the `npm install` just as we did earlier and also copying in your app source into the image.  
 - The `EXPOSE` command is a hint which ports your application and will be listening on and need to be mapped out to the container when it runs.  
-- The last `CMD` command is what starts the app up, just as we did with `npm start`.  
+- The last `CMD` part is what starts the app up, just as we did with `npm start`.  
 
 
 ## 3. Create git repo and push to VSTS
-To start to get a CI/CD pipeline going we need our code in source control so let's create a git repo and add out code to it. You can do this from the source control view in VS Code; the branch icon on the lefthand toolbar (also `Ctrl+Shift+G`) or from the integrated terminal run:
+To start to get a CI/CD pipeline going we need our code in source control so let's create a git repo and add our code to it. You can do this from the source control view in VS Code; the branch icon on the lefthand toolbar (also `Ctrl+Shift+G`) or from the integrated terminal you can run:
 ```
 git init
 git add .
 git commit -m "First commit"
 ```
-To get the code up into VSTS, we'll need to set the remote origin for the repo and push it, 
-> Note. You will get the correct URL & syntax for this part by expanding the *"push an existing repository from command line"* section of the project start page or from the 'code' section
+To get the code up into VSTS, go into your new project and we'll need to set the remote origin for the repo and push it.  
+> Note. You will get the correct URL & syntax for this part by expanding the *"push an existing repository from command line"* section of the project start page or from the 'code' section in VSTS
 ```
 git remote add origin https://{vsts_account}.visualstudio.com/_git/{project}
 git push -u origin --all
@@ -127,7 +127,13 @@ If you have trouble and you get username/password prompt at the command line, yo
 
 
 ## 4. Deploy resources to Azure
+Switching from VSTS to Azure for a moment, we'll set about creating the cloud resources we need to support our application and release pipeline. We'll do this by deploying a template, also called an ARM (Azure Resource Manager) template. This template is a json file that describes all the resources to be built, and any input parameters we want to supply. This template has been created for you and will deploy into Azure:
+* Azure Container Registry
+* Linux App Service Plan
+* Linux Web App
+* Storage Account
 
+Go into the [ARM folder under this repository](arm/) and you should see a page with big blue button which will
 
 ---
 
