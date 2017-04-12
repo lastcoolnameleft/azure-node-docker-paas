@@ -4,19 +4,23 @@
     "parameters": {
         "siteName": {
             "defaultValue": "demowebapp",
-            "type": "String"
+            "type": "string",
+            "metadata": {"description": "WebApp site name, must be globally unique"}
         },
         "registryName": {
             "defaultValue": "demoregistry",
-            "type": "String"
+            "type": "string",
+            "metadata": {"description": "Container registry name, must be globally unique"}
         },
         "dockerImageName": {
             "defaultValue": "myapp",
-            "type": "String"
+            "type": "string",
+            "metadata": {"description": "Docker image containing your app"}
         },
         "dockerImagePort": {
             "defaultValue": "3000",
-            "type": "String"
+            "type": "string",
+            "metadata": {"description": "Port exposed by your app container"}
         }                 
     },
     "variables": {
