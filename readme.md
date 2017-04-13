@@ -147,8 +147,6 @@ There are many ways to deploy this template, but we'll use a simple "Deploy to A
 Tick the 'I agree to the terms and conditions stated above' checkbox. If you've never used the Azure portal before, I also advise ticking the 'Pin to dashboard' option too. Then click 'Purchase' to start deployment.  
 Deployment should take about 1-2 minutes...  
 
-<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
 Once deployed, go into the new resource group and then click into the Container Registry as we'll need to get some information. The blade in the portal will open and from there click 'Access keys'. Three bits of info we need:  
 * Login server
 * Username (Note: this is always the same as the name of the registry)
@@ -169,13 +167,13 @@ First we'll add a connection to the Docker registry we created, using the inform
   * *Docker Registry:* URL pointing at your new registry, e.g. `https://{registry-login-server}` note the server ends in `.azurecr.io`
   * *Docker ID:* The username for your registry (Note: this is always the same as the name of the registry)
   * *Password:* The password you made a note of
+  
 <details>
   <summary>View screenshot of this step (Click to expand/collapse)</summary>
 
   ![vsts-acr](imgs/vsts-acr.png)
 </details>  
   
-
 Click OK and move over to the 'Build & Release' section VSTS. If you are prompted to use the 'New Build Editor' click yes, as it's much nicer and you will be able to follow my steps easier.  
 * Choose "empty process" rather than a template
 * Give a sensible name to the definition
