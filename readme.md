@@ -171,8 +171,8 @@ First we'll add a connection to the Docker registry we created, using the inform
   <summary>View screenshot of this step (Click to expand/collapse)</summary>
 
   ![vsts-acr](imgs/vsts-acr.png)
-</details>
-
+</details>  
+  
 Click OK and move over to the 'Build & Release' section VSTS. If you are prompted to use the 'New Build Editor' click yes, as it's much nicer and you will be able to follow my steps easier.  
 * Choose "empty process" rather than a template
 * Give a sensible name to the definition
@@ -201,7 +201,8 @@ Click OK and move over to the 'Build & Release' section VSTS. If you are prompte
   ![build-1](imgs/build-1.png)
   ![build-2](imgs/build-2.png)
   ![build-3](imgs/build-3.png)
-  ![build-4](imgs/build-4.png)
+  ![build-3](imgs/build-4.png)  
+  ![build-4](imgs/build-5.png)
 </details>
 
 Phew! That's a lot of manual steps, sorry!
