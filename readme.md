@@ -43,6 +43,7 @@ You will need the following things set up and installed on your machine:
 ## Initial Setup Steps
 Overview of steps:
  * Create a new VSTS account (or new project if you already have an account)
+ * Enable Docker support in VSTS via the marketplace. Open this link in a new tab: [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscs-rm.docker) and click "Install"
  * If you've never run git before, run these commands (modifying with your details as required):
  ```
 git config --global user.email "your-email@example.com"
@@ -125,6 +126,8 @@ git push -u origin --all
 If you have the git credential manager installed, authentication should should automatically pop up, so login with your VSTS account details.  
 If you have trouble and you get username/password prompt at the command line, you have the option of manually creating git credentials by going into *VSTS --> Code --> Generate Git credentials*
 
+You can validate this has worked by looking to the 'Code' section on the main VSTS menu.
+
 
 ## 4. Deploy resources to Azure
 Switching from VSTS to Azure for a moment, we'll set about creating the cloud resources we need to support our application and release pipeline. We'll do this by deploying a template, also called an ARM (Azure Resource Manager) template. This template is a json file that describes all the resources to be built, and any input parameters we want to supply. This template has been created for you and will deploy into Azure:
@@ -133,16 +136,59 @@ Switching from VSTS to Azure for a moment, we'll set about creating the cloud re
 * Linux Web App
 * Storage Account
 
-There are many ways to deploy this template, but we'll use a simple "Deploy to Azure" button and URL. Go into the [ARM folder under this repository](arm/) and you should see a page with big blue button which will jump into the Azure portal ready to deploy our template. You will be prompted for a number of things: 
+There are many ways to deploy this template, but we'll use a simple "Deploy to Azure" button and URL. Go into the [Azure folder under this repository](azure/) and you should see a page with big blue button which will jump into the Azure portal ready to deploy our template. You will be prompted for a number of things: 
 * *Resource group* - This group will hold all your resources. Choose any name you like
 * *Location* - Pick a local Azure region e.g. North or West Europe or one of the UK regions
-* *Site Name* - This is the name of your new site and Linux web app, :warning: Important! Pick a globally unique name as this site will be registered in global DNS. Use your initials and/or date, e.g. *`node-demo-bc-1204`*
-* *Registry Name* - This is the name of your new Docker registry, same as above *must be globally unique name!* and only use letters and numbers
+* *Site Name* - This is the name of your new site and Linux web app, :warning: Important! Pick a globally unique name as this site will be registered in global DNS. Suggestion, to use your initials and/or date, e.g. *`node-demo-bc-1204`*
+* *Registry Name* - This is the name of your new Docker registry, same as above *must be a globally unique name!* and only use letters and numbers
 * *Docker Image Name* - Leave this as `myapp` for now
-* *Docker Image Port* - Leave this as `3000`for now
+* *Docker Image Port* - Leave this as `3000` for now
 
 Tick the 'I agree to the terms and conditions stated above' checkbox. If you've never used the Azure portal before, I also advise ticking the 'Pin to dashboard' option too. Then click 'Purchase' to start deployment.  
-Deployment should take about 1 minute
+Deployment should take about 1-2 minutes...  
+
+Once deployed the resource group created should [look like this](imgs/res-group.png), click into the Container Registry as we'll need to get some information. The blade in the portal will open and from there click 'Access keys', the screen should [look like this](imgs/acr-keys.png). Three bits of info we need:  
+* Login server
+* Username (Note: this is always the same as the name of the registry)
+* Password (pick any one of the two)
+Copy and paste these into a scratch pad file, as we'll need them in a moment.
+
+
+## 5. VSTS Build Process
+First we'll add a connection to the Docker registry we created, using the information we previously gathered:  
+* Click the cog on the menu bar and go into 'Services'
+* Click 'New Service Endpoint' and pick 'Docker Registry' - 
+  * *Connection name:* Pick any sensible name
+  * *Docker Registry:* URL pointing at your new registry, e.g. `https://{registry-login-server}` note the server ends in `.azurecr.io`
+  * *Docker ID:* The username for your registry (Note: this is always the same as the name of the registry)
+  * *Password:* The password you made a note of
+
+> Note. A completed connection [looks something like this](imgs/vsts-acr.png)
+
+Click OK and move over to the 'Build & Release' section VSTS. If you are prompted to use the 'New Build Editor' click yes, as it's much nicer and you will be able to follow my steps easier.  
+* Choose "empty process" rather than a template
+* Give a sensible name to the definition
+* Click 'Add Task', search for "docker" and add the top task (simply called "Docker") TWICE
+* While still in the 'Add Task' view, search for "copy" and add the task called "Copy and Publish Build Artifacts"
+* Click the first Docker task in the list, change the following:
+  * Select your new Docker registry connection from the drop down
+  * Tick three options: 'Use Default Build Context', 'Qualify Image Name' & 'Include Latest Tag'
+  * Change the 'Image Name' to `myapp:$(Build.BuildId)`
+* Click the second Docker task in the list, change the following:
+  * Change the 'Action' to "Push an image"
+  * Select your new Docker registry connection from the drop down
+  * Tick two options: 'Qualify Image Name' & 'Include Latest Tag'
+  * Change the 'Image Name' to `myapp:$(Build.BuildId)`
+* Click the 'Copy Publish' action
+  * Change the 'Contents' to two asterisks `**`
+  * Change 'Artifact Name' to anything you like e.g. `stuff`
+  * For the 'Artifact Type' pick "Server"
+* Two final steps:
+  * Click on 'Triggers' at the top of the defintion and enable 'Continuous Integration'
+  * Next to that click on 'Options' and change the 'Default agent queue' to "Hosted Linux Preview"
+
+Phew! That's a lot of manual steps, sorry!
+Screenshots of the four major parts are: [build-1](imgs/build-1.png), [build-2](imgs/build-2.png), [build-3](imgs/build-3.png), [build-4](imgs/build-4.png)
 
 ---
 
