@@ -171,9 +171,10 @@ First we'll add a connection to the Docker registry we created, using the inform
 <details>
   <summary>View screenshot of this step (Click to expand/collapse)</summary>
 
-  ![vsts-acr](imgs/vsts-acr.png)
+  ![vsts-acr](imgs/vsts-acr.png)  
 </details>  
-  
+
+&nbsp;  
 Click OK and move over to the 'Build & Release' section VSTS. If you are prompted to use the 'New Build Editor' click yes, as it's much nicer and you will be able to follow my steps easier.  
 * Choose "empty process" rather than a template
 * Give a sensible name to the definition
