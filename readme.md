@@ -188,7 +188,16 @@ Click OK and move over to the 'Build & Release' section VSTS. If you are prompte
   * Next to that click on 'Options' and change the 'Default agent queue' to "Hosted Linux Preview"
 
 Phew! That's a lot of manual steps, sorry!
-Screenshots of the four major parts are: [build-1](imgs/build-1.png), [build-2](imgs/build-2.png), [build-3](imgs/build-3.png), [build-4](imgs/build-4.png)
+
+<details>
+  <summary>View screenshots (Click to expand)</summary>
+  Screenshots of the four major parts are: 
+  ![build-1](imgs/build-1.png)
+  ![build-2](imgs/build-2.png)
+  ![build-3](imgs/build-3.png)
+  ![build-4](imgs/build-4.png)
+</details>
+
 
 ---
 
