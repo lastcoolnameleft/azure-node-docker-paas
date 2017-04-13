@@ -147,12 +147,17 @@ There are many ways to deploy this template, but we'll use a simple "Deploy to A
 Tick the 'I agree to the terms and conditions stated above' checkbox. If you've never used the Azure portal before, I also advise ticking the 'Pin to dashboard' option too. Then click 'Purchase' to start deployment.  
 Deployment should take about 1-2 minutes...  
 
-Once deployed the resource group created should [look like this](imgs/res-group.png), click into the Container Registry as we'll need to get some information. The blade in the portal will open and from there click 'Access keys', the screen should [look like this](imgs/acr-keys.png). Three bits of info we need:  
+Once deployed, go into the new resource group and then click into the Container Registry as we'll need to get some information. The blade in the portal will open and from there click 'Access keys'. Three bits of info we need:  
 * Login server
 * Username (Note: this is always the same as the name of the registry)
 * Password (pick any one of the two)
 Copy and paste these into a scratch pad file, as we'll need them in a moment.
+<details>
+  <summary>View screenshots of this step (Click to expand/collapse)</summary>
 
+  ![res-group](imgs/res-group.png)
+  ![acr-keys](imgs/acr-keys.png)
+</details>
 
 ## 5. VSTS Build Process
 First we'll add a connection to the Docker registry we created, using the information we previously gathered:  
@@ -162,8 +167,11 @@ First we'll add a connection to the Docker registry we created, using the inform
   * *Docker Registry:* URL pointing at your new registry, e.g. `https://{registry-login-server}` note the server ends in `.azurecr.io`
   * *Docker ID:* The username for your registry (Note: this is always the same as the name of the registry)
   * *Password:* The password you made a note of
+<details>
+  <summary>View screenshot of this step (Click to expand/collapse)</summary>
 
-> Note. A completed connection [looks something like this](imgs/vsts-acr.png)
+  ![vsts-acr](imgs/vsts-acr.png)
+</details>
 
 Click OK and move over to the 'Build & Release' section VSTS. If you are prompted to use the 'New Build Editor' click yes, as it's much nicer and you will be able to follow my steps easier.  
 * Choose "empty process" rather than a template
@@ -186,17 +194,19 @@ Click OK and move over to the 'Build & Release' section VSTS. If you are prompte
 * Two final steps:
   * Click on 'Triggers' at the top of the defintion and enable 'Continuous Integration'
   * Next to that click on 'Options' and change the 'Default agent queue' to "Hosted Linux Preview"
-
-Phew! That's a lot of manual steps, sorry!
-
 <details>
-  <summary>View screenshots (Click to expand)</summary>
-  Screenshots of the four major parts are: 
+  <summary>View screenshots of this step (Click to expand/collapse)</summary>
+
+  Screenshots of the four major steps are: 
   ![build-1](imgs/build-1.png)
   ![build-2](imgs/build-2.png)
   ![build-3](imgs/build-3.png)
   ![build-4](imgs/build-4.png)
 </details>
+
+Phew! That's a lot of manual steps, sorry!
+
+
 
 
 ---
