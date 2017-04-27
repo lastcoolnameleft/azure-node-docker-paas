@@ -1,1 +1,534 @@
-{"source":2,"id":10,"revision":22,"name":"Node Release to Azure WebApp","createdBy":{"id":"81613f75-f6e3-49cb-abdf-ff2ba28a0d03","displayName":"Ben Coleman","uniqueName":"becolem@microsoft.com","url":"https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03","imageUrl":"https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"},"createdOn":"2017-04-12T08:43:59.527Z","modifiedBy":{"id":"81613f75-f6e3-49cb-abdf-ff2ba28a0d03","displayName":"Ben Coleman","uniqueName":"becolem@microsoft.com","url":"https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03","imageUrl":"https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"},"modifiedOn":"2017-04-12T10:26:45.770Z","lastRelease":null,"path":"\\","variables":{"sitename":{"value":"$(Release.EnvironmentName)-bcnode-demo"},"registry":{"value":"nodedemo"},"password":{"value":null,"isSecret":true},"appimage":{"value":"myapp"},"port":{"value":"3000"}},"variableGroups":[],"environments":[{"id":19,"name":"Dev","rank":1,"owner":{"id":"81613f75-f6e3-49cb-abdf-ff2ba28a0d03","displayName":"Ben Coleman","uniqueName":"becolem@microsoft.com","url":"https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03","imageUrl":"https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"},"variables":{},"preDeployApprovals":{"approvals":[{"rank":1,"isAutomated":true,"isNotificationOn":false,"id":55}]},"deployStep":{"tasks":[],"id":56},"postDeployApprovals":{"approvals":[{"rank":1,"isAutomated":true,"isNotificationOn":false,"id":57}]},"deployPhases":[{"deploymentInput":{"parallelExecution":{"parallelExecutionType":"none"},"skipArtifactsDownload":false,"timeoutInMinutes":0,"queueId":12,"demands":[],"enableAccessToken":false},"rank":1,"phaseType":1,"name":"Run on agent","workflowTasks":[{"taskId":"94a74903-f93f-4075-884f-dc11f34058b4","version":"2.*","name":"Azure Deployment","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"ConnectedServiceName":"1cef8f29-21aa-40ad-b32d-4daaa7bc4689","action":"Create Or Update Resource Group","resourceGroupName":"NodeDemo-$(Release.EnvironmentName)","location":"West Europe","templateLocation":"URL of the file","csmFileLink":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json","csmParametersFileLink":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json","csmFile":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json","csmParametersFile":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json","overrideParameters":"-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)","deploymentMode":"Incremental","enableDeploymentPrerequisites":"None","machineGroupName":"","copyAzureVMTags":"true","vstsPATToken":"","outputVariable":""}},{"taskId":"f045e430-8704-11e6-968f-e717e6411619","version":"0.*","name":"Restart Azure App Service","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"ConnectedServiceName":"1cef8f29-21aa-40ad-b32d-4daaa7bc4689","Action":"Restart Azure App Service","WebAppName":"$(sitename)","SpecifySlot":"false","ResourceGroupName":"","SourceSlot":"","SwapWithProduction":"true","TargetSlot":"","PreserveVnet":"false","Slot":""}},{"taskId":"2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc","version":"1.*","name":"Check site is up","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"url":"http://$(sitename).azurewebsites.net/"}}]}],"environmentOptions":{"emailNotificationType":"OnlyOnFailure","emailRecipients":"release.environment.owner;release.creator","skipArtifactsDownload":false,"timeoutInMinutes":0,"enableAccessToken":false},"demands":[],"conditions":[{"name":"ReleaseStarted","conditionType":1,"value":""}],"executionPolicy":{"concurrencyCount":0,"queueDepthCount":0},"schedules":[],"retentionPolicy":{"daysToKeep":30,"releasesToKeep":3,"retainBuild":true}},{"id":21,"name":"Test","rank":2,"owner":{"id":"81613f75-f6e3-49cb-abdf-ff2ba28a0d03","displayName":"Ben Coleman","uniqueName":"becolem@microsoft.com","url":"https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03","imageUrl":"https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"},"variables":{},"preDeployApprovals":{"approvals":[{"rank":1,"isAutomated":true,"isNotificationOn":false,"id":61}]},"deployStep":{"tasks":[],"id":64},"postDeployApprovals":{"approvals":[{"rank":1,"isAutomated":true,"isNotificationOn":false,"id":65}]},"deployPhases":[{"deploymentInput":{"parallelExecution":{"parallelExecutionType":"none"},"skipArtifactsDownload":false,"timeoutInMinutes":0,"queueId":12,"demands":[],"enableAccessToken":false},"rank":1,"phaseType":1,"name":"Run on agent","workflowTasks":[{"taskId":"94a74903-f93f-4075-884f-dc11f34058b4","version":"2.*","name":"Azure Deployment","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"ConnectedServiceName":"1cef8f29-21aa-40ad-b32d-4daaa7bc4689","action":"Create Or Update Resource Group","resourceGroupName":"NodeDemo-$(Release.EnvironmentName)","location":"West Europe","templateLocation":"URL of the file","csmFileLink":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json","csmParametersFileLink":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json","csmFile":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json","csmParametersFile":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json","overrideParameters":"-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)","deploymentMode":"Incremental","enableDeploymentPrerequisites":"None","machineGroupName":"","copyAzureVMTags":"true","vstsPATToken":"","outputVariable":""}},{"taskId":"f045e430-8704-11e6-968f-e717e6411619","version":"0.*","name":"Restart Azure App Service","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"ConnectedServiceName":"1cef8f29-21aa-40ad-b32d-4daaa7bc4689","Action":"Restart Azure App Service","WebAppName":"$(sitename)","SpecifySlot":"false","ResourceGroupName":"","SourceSlot":"","SwapWithProduction":"true","TargetSlot":"","PreserveVnet":"false","Slot":""}},{"taskId":"2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc","version":"1.*","name":"Check site is up","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"url":"http://$(sitename).azurewebsites.net/"}}]}],"environmentOptions":{"emailNotificationType":"OnlyOnFailure","emailRecipients":"release.environment.owner;release.creator","skipArtifactsDownload":false,"timeoutInMinutes":0,"enableAccessToken":false},"demands":[],"conditions":[{"name":"Dev","conditionType":2,"value":"4"}],"executionPolicy":{"concurrencyCount":0,"queueDepthCount":0},"schedules":[],"retentionPolicy":{"daysToKeep":30,"releasesToKeep":3,"retainBuild":true}},{"id":22,"name":"Staging","rank":3,"owner":{"id":"81613f75-f6e3-49cb-abdf-ff2ba28a0d03","displayName":"Ben Coleman","uniqueName":"becolem@microsoft.com","url":"https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03","imageUrl":"https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"},"variables":{},"preDeployApprovals":{"approvals":[{"rank":1,"isAutomated":true,"isNotificationOn":false,"id":62}]},"deployStep":{"tasks":[],"id":63},"postDeployApprovals":{"approvals":[{"rank":1,"isAutomated":true,"isNotificationOn":false,"id":66}]},"deployPhases":[{"deploymentInput":{"parallelExecution":{"parallelExecutionType":"none"},"skipArtifactsDownload":false,"timeoutInMinutes":0,"queueId":12,"demands":[],"enableAccessToken":false},"rank":1,"phaseType":1,"name":"Run on agent","workflowTasks":[{"taskId":"94a74903-f93f-4075-884f-dc11f34058b4","version":"2.*","name":"Azure Deployment","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"ConnectedServiceName":"1cef8f29-21aa-40ad-b32d-4daaa7bc4689","action":"Create Or Update Resource Group","resourceGroupName":"NodeDemo-$(Release.EnvironmentName)","location":"West Europe","templateLocation":"URL of the file","csmFileLink":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json","csmParametersFileLink":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json","csmFile":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json","csmParametersFile":"https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json","overrideParameters":"-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)","deploymentMode":"Incremental","enableDeploymentPrerequisites":"None","machineGroupName":"","copyAzureVMTags":"true","vstsPATToken":"","outputVariable":""}},{"taskId":"f045e430-8704-11e6-968f-e717e6411619","version":"0.*","name":"Restart Azure App Service","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"ConnectedServiceName":"1cef8f29-21aa-40ad-b32d-4daaa7bc4689","Action":"Restart Azure App Service","WebAppName":"$(sitename)","SpecifySlot":"false","ResourceGroupName":"","SourceSlot":"","SwapWithProduction":"true","TargetSlot":"","PreserveVnet":"false","Slot":""}},{"taskId":"2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc","version":"1.*","name":"Check site is up","enabled":true,"alwaysRun":false,"continueOnError":false,"timeoutInMinutes":0,"definitionType":"task","inputs":{"url":"http://$(sitename).azurewebsites.net/"}}]}],"environmentOptions":{"emailNotificationType":"Always","emailRecipients":"release.environment.owner;release.creator","skipArtifactsDownload":false,"timeoutInMinutes":0,"enableAccessToken":false},"demands":[],"conditions":[{"name":"Test","conditionType":2,"value":"4"}],"executionPolicy":{"concurrencyCount":0,"queueDepthCount":0},"schedules":[],"retentionPolicy":{"daysToKeep":30,"releasesToKeep":3,"retainBuild":true}}],"artifacts":[{"sourceId":"7a80f697-4544-4355-b69f-be236124ff4c:23","type":"Build","alias":"Build Node Docker Image","definitionReference":{"artifactSourceDefinitionUrl":{"id":"https://benc-uk.visualstudio.com/_permalink/_build/index?collectionId=99bcfaf8-1201-461a-9c7e-49d5ae0ca316&projectId=7a80f697-4544-4355-b69f-be236124ff4c&definitionId=23","name":""},"defaultVersionBranch":{"id":"","name":""},"defaultVersionSpecific":{"id":"","name":""},"defaultVersionTags":{"id":"","name":""},"defaultVersionType":{"id":"latestType","name":"Latest"},"definition":{"id":"23","name":"Build Node Docker Image"},"project":{"id":"7a80f697-4544-4355-b69f-be236124ff4c","name":"Demo Project"}},"isPrimary":true}],"triggers":[{"artifactAlias":"Build Node Docker Image","triggerConditions":[],"triggerType":1}],"releaseNameFormat":"Release-$(rev:r)","url":"https://benc-uk.vsrm.visualstudio.com/7a80f697-4544-4355-b69f-be236124ff4c/_apis/Release/definitions/10","_links":{"self":{"href":"https://benc-uk.vsrm.visualstudio.com/7a80f697-4544-4355-b69f-be236124ff4c/_apis/Release/definitions/10"},"web":{"href":"https://benc-uk.visualstudio.com/7a80f697-4544-4355-b69f-be236124ff4c/_apps/hub/ms.vss-releaseManagement-web.hub-explorer?definitionId=10"}},"tags":[],"properties":{}}
+{
+    "source": 2,
+    "id": 10,
+    "revision": 22,
+    "name": "Node Release to Azure WebApp",
+    "createdBy": {
+        "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+        "displayName": "Ben Coleman",
+        "uniqueName": "becolem@microsoft.com",
+        "url": "https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+        "imageUrl": "https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"
+    },
+    "createdOn": "2017-04-12T08:43:59.527Z",
+    "modifiedBy": {
+        "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+        "displayName": "Ben Coleman",
+        "uniqueName": "becolem@microsoft.com",
+        "url": "https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+        "imageUrl": "https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"
+    },
+    "modifiedOn": "2017-04-12T10:26:45.770Z",
+    "lastRelease": null,
+    "path": "\\",
+    "variables": {
+        "sitename": {
+            "value": "$(Release.EnvironmentName)-bcnode-demo"
+        },
+        "registry": {
+            "value": "nodedemo"
+        },
+        "password": {
+            "value": null,
+            "isSecret": true
+        },
+        "appimage": {
+            "value": "myapp"
+        },
+        "port": {
+            "value": "3000"
+        }
+    },
+    "variableGroups": [],
+    "environments": [
+        {
+            "id": 19,
+            "name": "Dev",
+            "rank": 1,
+            "owner": {
+                "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+                "displayName": "Ben Coleman",
+                "uniqueName": "becolem@microsoft.com",
+                "url": "https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+                "imageUrl": "https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"
+            },
+            "variables": {},
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 55
+                    }
+                ]
+            },
+            "deployStep": {
+                "tasks": [],
+                "id": 56
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 57
+                    }
+                ]
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": "none"
+                        },
+                        "skipArtifactsDownload": false,
+                        "timeoutInMinutes": 0,
+                        "queueId": 12,
+                        "demands": [],
+                        "enableAccessToken": false
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Run on agent",
+                    "workflowTasks": [
+                        {
+                            "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
+                            "version": "2.*",
+                            "name": "Azure Deployment",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
+                                "action": "Create Or Update Resource Group",
+                                "resourceGroupName": "NodeDemo-$(Release.EnvironmentName)",
+                                "location": "West Europe",
+                                "templateLocation": "URL of the file",
+                                "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
+                                "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
+                                "csmFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
+                                "csmParametersFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
+                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
+                                "deploymentMode": "Incremental",
+                                "enableDeploymentPrerequisites": "None",
+                                "machineGroupName": "",
+                                "copyAzureVMTags": "true",
+                                "vstsPATToken": "",
+                                "outputVariable": ""
+                            }
+                        },
+                        {
+                            "taskId": "f045e430-8704-11e6-968f-e717e6411619",
+                            "version": "0.*",
+                            "name": "Restart Azure App Service",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
+                                "Action": "Restart Azure App Service",
+                                "WebAppName": "$(sitename)",
+                                "SpecifySlot": "false",
+                                "ResourceGroupName": "",
+                                "SourceSlot": "",
+                                "SwapWithProduction": "true",
+                                "TargetSlot": "",
+                                "PreserveVnet": "false",
+                                "Slot": ""
+                            }
+                        },
+                        {
+                            "taskId": "2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc",
+                            "version": "1.*",
+                            "name": "Check site is up",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "url": "http://$(sitename).azurewebsites.net/"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "ReleaseStarted",
+                    "conditionType": 1,
+                    "value": ""
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 0,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            }
+        },
+        {
+            "id": 21,
+            "name": "Test",
+            "rank": 2,
+            "owner": {
+                "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+                "displayName": "Ben Coleman",
+                "uniqueName": "becolem@microsoft.com",
+                "url": "https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+                "imageUrl": "https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"
+            },
+            "variables": {},
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 61
+                    }
+                ]
+            },
+            "deployStep": {
+                "tasks": [],
+                "id": 64
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 65
+                    }
+                ]
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": "none"
+                        },
+                        "skipArtifactsDownload": false,
+                        "timeoutInMinutes": 0,
+                        "queueId": 12,
+                        "demands": [],
+                        "enableAccessToken": false
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Run on agent",
+                    "workflowTasks": [
+                        {
+                            "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
+                            "version": "2.*",
+                            "name": "Azure Deployment",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
+                                "action": "Create Or Update Resource Group",
+                                "resourceGroupName": "NodeDemo-$(Release.EnvironmentName)",
+                                "location": "West Europe",
+                                "templateLocation": "URL of the file",
+                                "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
+                                "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
+                                "csmFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
+                                "csmParametersFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
+                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
+                                "deploymentMode": "Incremental",
+                                "enableDeploymentPrerequisites": "None",
+                                "machineGroupName": "",
+                                "copyAzureVMTags": "true",
+                                "vstsPATToken": "",
+                                "outputVariable": ""
+                            }
+                        },
+                        {
+                            "taskId": "f045e430-8704-11e6-968f-e717e6411619",
+                            "version": "0.*",
+                            "name": "Restart Azure App Service",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
+                                "Action": "Restart Azure App Service",
+                                "WebAppName": "$(sitename)",
+                                "SpecifySlot": "false",
+                                "ResourceGroupName": "",
+                                "SourceSlot": "",
+                                "SwapWithProduction": "true",
+                                "TargetSlot": "",
+                                "PreserveVnet": "false",
+                                "Slot": ""
+                            }
+                        },
+                        {
+                            "taskId": "2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc",
+                            "version": "1.*",
+                            "name": "Check site is up",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "url": "http://$(sitename).azurewebsites.net/"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "Dev",
+                    "conditionType": 2,
+                    "value": "4"
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 0,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            }
+        },
+        {
+            "id": 22,
+            "name": "Staging",
+            "rank": 3,
+            "owner": {
+                "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+                "displayName": "Ben Coleman",
+                "uniqueName": "becolem@microsoft.com",
+                "url": "https://app.vssps.visualstudio.com/Ac13c7b99-2463-4cd0-84a0-5260108a913e/_apis/Identities/81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
+                "imageUrl": "https://benc-uk.visualstudio.com/_api/_common/identityImage?id=81613f75-f6e3-49cb-abdf-ff2ba28a0d03"
+            },
+            "variables": {},
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 62
+                    }
+                ]
+            },
+            "deployStep": {
+                "tasks": [],
+                "id": 63
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 66
+                    }
+                ]
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": "none"
+                        },
+                        "skipArtifactsDownload": false,
+                        "timeoutInMinutes": 0,
+                        "queueId": 12,
+                        "demands": [],
+                        "enableAccessToken": false
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Run on agent",
+                    "workflowTasks": [
+                        {
+                            "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
+                            "version": "2.*",
+                            "name": "Azure Deployment",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
+                                "action": "Create Or Update Resource Group",
+                                "resourceGroupName": "NodeDemo-$(Release.EnvironmentName)",
+                                "location": "West Europe",
+                                "templateLocation": "URL of the file",
+                                "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
+                                "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
+                                "csmFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
+                                "csmParametersFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
+                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
+                                "deploymentMode": "Incremental",
+                                "enableDeploymentPrerequisites": "None",
+                                "machineGroupName": "",
+                                "copyAzureVMTags": "true",
+                                "vstsPATToken": "",
+                                "outputVariable": ""
+                            }
+                        },
+                        {
+                            "taskId": "f045e430-8704-11e6-968f-e717e6411619",
+                            "version": "0.*",
+                            "name": "Restart Azure App Service",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
+                                "Action": "Restart Azure App Service",
+                                "WebAppName": "$(sitename)",
+                                "SpecifySlot": "false",
+                                "ResourceGroupName": "",
+                                "SourceSlot": "",
+                                "SwapWithProduction": "true",
+                                "TargetSlot": "",
+                                "PreserveVnet": "false",
+                                "Slot": ""
+                            }
+                        },
+                        {
+                            "taskId": "2a1711d0-b4a4-11e6-a3c2-edf36ba3fddc",
+                            "version": "1.*",
+                            "name": "Check site is up",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "inputs": {
+                                "url": "http://$(sitename).azurewebsites.net/"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "Always",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "Test",
+                    "conditionType": 2,
+                    "value": "4"
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 0,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            }
+        }
+    ],
+    "artifacts": [
+        {
+            "sourceId": "7a80f697-4544-4355-b69f-be236124ff4c:23",
+            "type": "Build",
+            "alias": "Build Node Docker Image",
+            "definitionReference": {
+                "artifactSourceDefinitionUrl": {
+                    "id": "https://benc-uk.visualstudio.com/_permalink/_build/index?collectionId=99bcfaf8-1201-461a-9c7e-49d5ae0ca316&projectId=7a80f697-4544-4355-b69f-be236124ff4c&definitionId=23",
+                    "name": ""
+                },
+                "defaultVersionBranch": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionSpecific": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionTags": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionType": {
+                    "id": "latestType",
+                    "name": "Latest"
+                },
+                "definition": {
+                    "id": "23",
+                    "name": "Build Node Docker Image"
+                },
+                "project": {
+                    "id": "7a80f697-4544-4355-b69f-be236124ff4c",
+                    "name": "Demo Project"
+                }
+            },
+            "isPrimary": true
+        }
+    ],
+    "triggers": [
+        {
+            "artifactAlias": "Build Node Docker Image",
+            "triggerConditions": [],
+            "triggerType": 1
+        }
+    ],
+    "releaseNameFormat": "Release-$(rev:r)",
+    "url": "https://benc-uk.vsrm.visualstudio.com/7a80f697-4544-4355-b69f-be236124ff4c/_apis/Release/definitions/10",
+    "_links": {
+        "self": {
+            "href": "https://benc-uk.vsrm.visualstudio.com/7a80f697-4544-4355-b69f-be236124ff4c/_apis/Release/definitions/10"
+        },
+        "web": {
+            "href": "https://benc-uk.visualstudio.com/7a80f697-4544-4355-b69f-be236124ff4c/_apps/hub/ms.vss-releaseManagement-web.hub-explorer?definitionId=10"
+        }
+    },
+    "tags": [],
+    "properties": {}
+}
