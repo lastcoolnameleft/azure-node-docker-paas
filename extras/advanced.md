@@ -13,13 +13,13 @@ az acr create --admin-enabled --sku Basic --verbose -l westeurope -n demoregfoo1
 
 ### VSTS Release defintion 
 
-Rather than the release being a simple restart of the web app, we'll deploy the Azure resources at this stage across multiple environments. Using the following [ARM template](https://github.com/benc-uk/azure-arm/tree/master/paas-web/webapp-linux-custom) which is hosted in a separate Github repo.
+Rather than use static pre-deployed resources, we'll deploy the Azure resources at the release stage across multiple environments. Using the following [ARM template](https://github.com/benc-uk/azure-arm/tree/master/paas-web/webapp-linux-custom) which is hosted in a separate Github repo.
 The release definition is likely too laborious to create manually, esp. in a demo scenario so import the definition from the JSON file found in the [extras folder](extras/)  
 
 Once imported:
- - Modify the 'Variables' section and enter your ACR information; registry name, username & password. 
-   - Make sure the sitename variable will be a globally unique name, the default prefixes the site with the environment name e.g. Dev/Test/Staging
- - In Environments - Click on 'Run on agent' and select 'Hosted'
- - Select an Azure subscription in the dropdown for any of the Azure tasks, clicking Authorize if necessary. You'll need to set this in both tasks across the 3 environments (so six times)
+- Modify the 'Variables' section and enter your ACR information; registry name, username & password. 
+  - Make sure the sitename variable will be a globally unique name, the default prefixes the site with the environment name e.g. Dev/Test/Staging
+- In Environments - Click on 'Run on agent' and select 'Hosted'
+- Select an Azure subscription in the dropdown for any of the Azure tasks, clicking Authorize if necessary. You'll need to set this in both tasks across the 3 environments (so six times)
 
 

@@ -148,22 +148,27 @@ There are many ways to deploy this template, but we'll use a simple "Deploy to A
 Tick the **'I agree to the terms and conditions stated above'** checkbox. If you've never used the Azure portal before, I also advise ticking the **'Pin to dashboard'** option too. Then click **'Purchase'** to start deployment.  
 Deployment should take about 1-2 minutes...  
 
-Once deployed, go into the new resource group (if you ticked the option to pin to your dashboard you will be taken there automatically). We don't need to do anything here, but it's good to validate the deployment & spend 5 minutes looking at what as been deployed, especially if you haven't used Azure before
- 
+Once deployed, go into the new resource group (if you ticked the option to pin to your dashboard you will be taken there automatically). We don't need to do anything here, but it's good to validate the deployment & spend 5 minutes looking at what as been deployed, especially if you haven't used Azure before.  
+
+<details>
+  <summary>View screenshots of the Azure resources (Click to expand/collapse)</summary>
+
+  ![build-1](imgs/res-group.png)
+</details> 
 
 ## 5. VSTS build process
 Back in VSTS and in your new project, click into *Build & Release --> Build* from the main menu. If you are prompted with a blue bar at the top to try the new build editor, definitely enable it by clicking **'Try It'**, otherwise enable it from hovering over your account top right and going into **'Preview features'**. 
 
 * Click **'+ New Definition'**
 * Choose **'Container (PREVIEW)'** as the starting template (near the bottom)
-* Give a sensible name to the definition
+* Give a sensible name to the definition, e.g. *"Build MyApp Docker Image"*
 * Click the **'Build an image'** task in the list, change the following:
   * Pick your Azure subscription from the drop down, then click **'Authorize'**, this will take about 30 seconds
   * Now click the **'Azure Container Registry'** dropdown and select your registry you just built
   * Tick these options: **'Qualify Image Name'** & **'Include Latest Tag'**
   * Change the **'Image Name'** to `myapp:$(Build.BuildId)`
 * Click the **'Push an image'** task in the list, change the following:
-  * Pick your Azure subscription from the drop down
+  * Pick your Azure subscription again from the drop down
   * Now click the **'Azure Container Registry'** dropdown and select your registry you just built
   * Tick these options: **'Qualify Image Name'** & **'Include Latest Tag'**
   * Change the **'Image Name'** to `myapp:$(Build.BuildId)`
@@ -191,7 +196,7 @@ Click on **'Save & queue'** then queue a new manual build in order to validate e
 
 
 ## 6. VSTS release process
-Our release process is slightly unorthodox. The way Azure Linux Web Apps work is they deploy a Docker container for you to spin up your app. As a PaaS service this is done seamlessly for you behind the scenes. To get the Web App to redeploy the container with your new build (or updated build) we need to restart the Web App. So our release process is simply restarting the Web App in Azure
+Our release process is slightly unorthodox, as for simplicity we've pre-deployed our resources in the step above. The way Azure Linux Web Apps work is they deploy a Docker container for you to spin up your app. As a PaaS service this is done seamlessly for you behind the scenes. To get the Web App to redeploy the container with your new build (or updated build) we need to restart the Web App. So our release process is simply restarting the Web App in Azure
 
 On main menu click into *Build & Release --> Releases*:
 * Click **'+ New Definition'**
@@ -210,14 +215,21 @@ On main menu click into *Build & Release --> Releases*:
 * Where it says **_"Release Release-1 has been created."_** click into _Release-1_ and click on **'Logs'**
 * Validate that the site has been restarted
 
+<details>
+  <summary>View screenshot of the release defintion (Click to expand/collapse)</summary>
+
+  ![build-1](imgs/rel.png)
+</details> 
+
 
 ## 7. View deployed site & trigger pipeline
 OK the part we've been waiting for... assuming your build and release are working, the Node.js app should now be deployed to your site in Azure. The URL of your website is `http://<sitename>.azurewebsites.net` you can also go to the site via the Azure portal; click into the App Service (your web app) and in overview section is a clickable URL.  
 
-Note. Be patent! As the very first time the site loads Azure will start & deploy the underlying Docker container, which can take a minute or two. So be prepared to wait & refresh once or twice. If you get a permanent 503 error then something has gone wrong and Azure can't start your container.  
+> Note. Be patent! As the very first time the site loads Azure will start & deploy the underlying Docker container, which can take a minute or two. So be prepared to wait & refresh once or twice. If you get a permanent 503 error then something has gone wrong and Azure can't start your container.  
 
 To test the end to end automated CI/CD process, go back to you app in VS Code, make a small change to ***views/index.pug*** just put in some extra text or whatever you like. Then in the VS Code source code view (3rd icon from top on the far right) commit your change with a comment, then click the '…' and pick 'Push' to push this change into VSTS.  
 This in turn should trigger the build to run (CI), then when that completes it will trigger the release (CD) and update the site with your changed code.  
+
 Job done!  
 
 ---
@@ -227,7 +239,7 @@ You should now have a containerized Node.js application, hosted & running in Azu
 
 There's obviously lots more that can be done to enhance and extend this scenario, some ideas to try out:
 * Add automated testing to the release, a simple one is just checking URL is available via this [marketplace task](https://marketplace.visualstudio.com/items?itemName=saeidbabaei.checkUrl&showReviewDialog=true)
-* Deploy your Azure resources via templates (infrastructure as code) see the [advanced nodes](extras/advanced.md) for some guidance on this. 
+* Deploy your Azure resources via templates (infrastructure as code) see the [advanced notes](extras/advanced.md) for some guidance on this. 
 * Create multiple environments in your release (dev/test/staging/pre-prod etc.)
 * Write a better app ;)
 
