@@ -8,7 +8,7 @@ The scenario will cover:
 * Docker
 * Azure Container Registry 
 * Azure Web App (Linux)
-* VSTS
+* Visual Studio Team Services (VSTS)
 
 You do not need to be an Node.js or JavaScript expert for the coding part but you will need to make basic changes to a JS file. Likewise no prior experience with VSTS and Azure is required (but obviously beneficial). We will also spend some time with Docker registries and image building & tagging. You will be able to complete the lab with either a Windows or Mac machine, but only Windows has been tested.
 
@@ -17,11 +17,10 @@ The high level overall flow is:
 * Add Docker support
 * Git repo setup
 * Deploy resources in Azure from template
-* Get Azure Container Registry details 
 * Creation of VSTS project and code repo
 * Push of git repo into VSTS
-* Create & run VSTS build definition 
-* Create & run VSTS release definition 
+* Create & run VSTS build definition - generate Docker Image
+* Create & run VSTS release definition - deploy Docker container
 * Resulting in our Node app deployed & running in a Azure Linux Web App
 
 ---
