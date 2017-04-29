@@ -192,20 +192,20 @@ Click on 'Save & queue' then queue a new manual build in order to validate every
 Our release process is slightly unorthodox. The way Azure Linux Web Apps work is they deploy a Docker container for you to spin up your app. As a PaaS service this is done seamlessly for you behind the scenes. To get the Web App to redeploy the container with your new build (or updated build) we need to restart the Web App. So our release process is simply restarting the Web App in Azure
 
 Click into *Build & Release --> Releases*:
-* Click '+ New Definition'
-* Pick 'Start with an empty definition' 
-* Click the pencil at the top and rename the defintion something sensible e.g. "Release to Azure"
-* Pick your project & new build defintion as the source, and also enable 'Continuous deployment' 
-* Click 'Add tasks' and add the "Azure App Service Manage (PREVIEW)" task, click 'Close'.
+* Click **'+ New Definition'**
+* Pick **'Start with an empty definition'**
+* Click the pencil at the top and rename the defintion something sensible e.g. *"Release to Azure"*
+* Pick your project & new build defintion as the source, and also enable **'Continuous deployment'** checkbox
+* Click **'Add tasks'** and add the **'Azure App Service Manage (PREVIEW)'** task, click **'Close'**
 * Change the following options:
   * Azure subscription: pick from the drop down
-  * Action: "Restart App Service"
+  * Action: **"Restart App Service"**
   * App Service name: select your site name you deployed earlier
-* Name your environment something sensible like "Dev" or "Test"
-* Click 'Save' button
-* Click '+ Release' then 'Create Release'
-* Take the defaults and click 'Create'
-* Where it says **_"Release Release-1 has been created."_** click into _Release-1_ and click on 'Logs'
+* Name your environment something sensible like *"Dev"* or *"Test"*
+* Click **'Save'** button
+* Click **'+ Release'** then **'Create Release'**
+* Take the defaults and click **'Create'**
+* Where it says **_"Release Release-1 has been created."_** click into _Release-1_ and click on **'Logs'**
 * Validate that the site has been restarted
 
 
