@@ -204,7 +204,7 @@ Click OK and move over to the 'Build & Release' section VSTS. If you are prompte
   ![build-2](imgs/build-2.png)
   ![build-3](imgs/build-3.png)
   ![build-3](imgs/build-4.png)  
-  ![build-4](imgs/build-5.png)
+  ![build-4](imgs/build-5.png)  
 </details>
 
 Phew! That's a lot of manual steps, sorry!
