@@ -143,36 +143,36 @@ There are many ways to deploy this template, but we'll use a simple "Deploy to A
 * *Docker Image Name* - Leave this as `myapp` for now
 * *Docker Image Port* - Leave this as `3000` for now
 
-Tick the 'I agree to the terms and conditions stated above' checkbox. If you've never used the Azure portal before, I also advise ticking the 'Pin to dashboard' option too. Then click 'Purchase' to start deployment.  
+Tick the **'I agree to the terms and conditions stated above'** checkbox. If you've never used the Azure portal before, I also advise ticking the **'Pin to dashboard'** option too. Then click **'Purchase'** to start deployment.  
 Deployment should take about 1-2 minutes...  
 
 Once deployed, go into the new resource group (if you ticked the option to pin to your dashboard you will be taken there automatically). We don't need to do anything here, but it's good to validate the deployment & spend 5 minutes looking at what as been deployed, especially if you haven't used Azure before
  
 
 ## 5. VSTS build process
-Back in VSTS and in your new project, click into *Build & Release --> Build*. If you are prompted with a blue bar at the top to try the new build editor, definitely enable it by clicking 'Try It', otherwise enable it from hovering over your account top right and going into 'Preview features'. 
+Back in VSTS and in your new project, click into *Build & Release --> Build* from the main menu. If you are prompted with a blue bar at the top to try the new build editor, definitely enable it by clicking **'Try It'**, otherwise enable it from hovering over your account top right and going into **'Preview features'**. 
 
-* Click '+ New Definition'
-* Choose "Container (PREVIEW)" as the starting template (near the bottom)
+* Click **'+ New Definition'**
+* Choose **'Container (PREVIEW)'** as the starting template (near the bottom)
 * Give a sensible name to the definition
-* Click the 'Build an image' task in the list, change the following:
-  * Pick your Azure subscription from the drop down, then click 'Authorize', this will take about 30 seconds
-  * Now click the 'Azure Container Registry' dropdown and select your registry you just built
-  * Tick these options: 'Qualify Image Name' & 'Include Latest Tag'
-  * Change the 'Image Name' to `myapp:$(Build.BuildId)`
-* Click the 'Push an image' task in the list, change the following:
+* Click the **'Build an image'** task in the list, change the following:
+  * Pick your Azure subscription from the drop down, then click **'Authorize'**, this will take about 30 seconds
+  * Now click the **'Azure Container Registry'** dropdown and select your registry you just built
+  * Tick these options: **'Qualify Image Name'** & **'Include Latest Tag'**
+  * Change the **'Image Name'** to `myapp:$(Build.BuildId)`
+* Click the **'Push an image'** task in the list, change the following:
   * Pick your Azure subscription from the drop down
-  * Now click the 'Azure Container Registry' dropdown and select your registry you just built
-  * Tick these options: 'Qualify Image Name' & 'Include Latest Tag'
-  * Change the 'Image Name' to `myapp:$(Build.BuildId)`
-* Click 'Add Task', search for "copy" and add the task called "Copy and Publish Build Artifacts"
+  * Now click the **'Azure Container Registry'** dropdown and select your registry you just built
+  * Tick these options: **'Qualify Image Name'** & **'Include Latest Tag'**
+  * Change the **'Image Name'** to `myapp:$(Build.BuildId)`
+* Click **'Add Task'**, search for *"copy"* and add the task called **'Copy and Publish Build Artifacts'**
 * Click the new task:
-  * Change the 'Contents' to two asterisks `**`
-  * Change 'Artifact Name' to anything you like e.g. `stuff`
-  * For the 'Artifact Type' pick "Server"
+  * Change the **'Contents'** to two asterisks `**`
+  * Change **'Artifact Name'** to anything you like e.g. `stuff`
+  * For the **'Artifact Type'** pick **'Server'**
 * Two final steps:
-  * Click on 'Triggers' at the top of the defintion and enable 'Continuous Integration'
-  * Next to that click on 'Options' and change the 'Default agent queue' to "Hosted Linux Preview"
+  * Click on **'Triggers'** at the top of the defintion and enable **'Continuous Integration'**
+  * Next to that click on **'Options'** and change the **'Default agent queue'** to **'Hosted Linux Preview'**
 <details>
   <summary>View screenshots of this step (Click to expand/collapse)</summary>
 
@@ -185,13 +185,13 @@ Back in VSTS and in your new project, click into *Build & Release --> Build*. If
 </details>  
 
 Phew! That's a lot of manual steps, sorry!
-Click on 'Save & queue' then queue a new manual build in order to validate everything. You can sit an watch it run which should take less than 3 mins, or jump to the next step and come back here to check and fix any problems
+Click on **'Save & queue'** then queue a new manual build in order to validate everything. You can sit an watch it run which should take less than 3 mins, or jump to the next step and come back here to check and fix any problems
 
 
 ## 6. VSTS release process
 Our release process is slightly unorthodox. The way Azure Linux Web Apps work is they deploy a Docker container for you to spin up your app. As a PaaS service this is done seamlessly for you behind the scenes. To get the Web App to redeploy the container with your new build (or updated build) we need to restart the Web App. So our release process is simply restarting the Web App in Azure
 
-Click into *Build & Release --> Releases*:
+On main menu click into *Build & Release --> Releases*:
 * Click **'+ New Definition'**
 * Pick **'Start with an empty definition'**
 * Click the pencil at the top and rename the defintion something sensible e.g. *"Release to Azure"*
