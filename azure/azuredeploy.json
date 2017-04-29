@@ -31,7 +31,7 @@
         {
             "type": "Microsoft.Web/serverfarms",
             "sku": {
-                "name": "B1",
+                "name": "B2",
                 "capacity": 1
             },
             "properties": {
@@ -40,14 +40,14 @@
             "kind": "linux",
             "name": "[variables('servicePlanName')]",
             "apiVersion": "2015-08-01",
-            "location": "westeurope"
+            "location": "westus"
         },
         {
             "type": "Microsoft.Web/sites",
             "kind": "app",
             "name": "[parameters('siteName')]",
             "apiVersion": "2015-08-01",
-            "location": "westeurope",
+            "location": "westus",
             "properties": {
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
                 "siteConfig": {

@@ -7,15 +7,9 @@ In this version of the flow, skip step 4 completely, but instead create an ACR i
 
 Create an ACR instance using Azure CLI v2. [Install instructions](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)  
 ```
+az group create -n MyResGroup -l westeurope
 az acr create --admin-enabled --sku Basic --verbose -l westeurope -n demoregfoo123 -g MyResGroup 
 ```
-
-Then get password using:  
-```
-az acr credential show --name demoregfoo123
-```
-Then make a note of the username & password
-
 
 ### VSTS Release defintion 
 

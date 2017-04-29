@@ -2,7 +2,7 @@
     "source": 2,
     "id": 10,
     "revision": 22,
-    "name": "Node Release to Azure WebApp",
+    "name": "Release App to Azure",
     "createdBy": {
         "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
         "displayName": "Ben Coleman",
@@ -26,7 +26,7 @@
             "value": "$(Release.EnvironmentName)-bcnode-demo"
         },
         "registry": {
-            "value": "nodedemo"
+            "value": "!changeme!"
         },
         "password": {
             "value": null,
@@ -112,7 +112,7 @@
                                 "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
                                 "csmFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
                                 "csmParametersFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
-                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
+                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B3 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
                                 "deploymentMode": "Incremental",
                                 "enableDeploymentPrerequisites": "None",
                                 "machineGroupName": "",
@@ -256,7 +256,7 @@
                                 "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
                                 "csmFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
                                 "csmParametersFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
-                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
+                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B3 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
                                 "deploymentMode": "Incremental",
                                 "enableDeploymentPrerequisites": "None",
                                 "machineGroupName": "",
@@ -400,7 +400,7 @@
                                 "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
                                 "csmFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
                                 "csmParametersFile": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
-                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B1 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
+                                "overrideParameters": "-siteName $(sitename) -sitePlanSize B3 -registryName $(registry) -registryPassword $(password) -dockerImageName $(appimage) -dockerImagePort $(port)",
                                 "deploymentMode": "Incremental",
                                 "enableDeploymentPrerequisites": "None",
                                 "machineGroupName": "",
@@ -475,49 +475,8 @@
         }
     ],
     "artifacts": [
-        {
-            "sourceId": "7a80f697-4544-4355-b69f-be236124ff4c:23",
-            "type": "Build",
-            "alias": "Build Node Docker Image",
-            "definitionReference": {
-                "artifactSourceDefinitionUrl": {
-                    "id": "https://benc-uk.visualstudio.com/_permalink/_build/index?collectionId=99bcfaf8-1201-461a-9c7e-49d5ae0ca316&projectId=7a80f697-4544-4355-b69f-be236124ff4c&definitionId=23",
-                    "name": ""
-                },
-                "defaultVersionBranch": {
-                    "id": "",
-                    "name": ""
-                },
-                "defaultVersionSpecific": {
-                    "id": "",
-                    "name": ""
-                },
-                "defaultVersionTags": {
-                    "id": "",
-                    "name": ""
-                },
-                "defaultVersionType": {
-                    "id": "latestType",
-                    "name": "Latest"
-                },
-                "definition": {
-                    "id": "23",
-                    "name": "Build Node Docker Image"
-                },
-                "project": {
-                    "id": "7a80f697-4544-4355-b69f-be236124ff4c",
-                    "name": "Demo Project"
-                }
-            },
-            "isPrimary": true
-        }
     ],
     "triggers": [
-        {
-            "artifactAlias": "Build Node Docker Image",
-            "triggerConditions": [],
-            "triggerType": 1
-        }
     ],
     "releaseNameFormat": "Release-$(rev:r)",
     "url": "https://benc-uk.vsrm.visualstudio.com/7a80f697-4544-4355-b69f-be236124ff4c/_apis/Release/definitions/10",
