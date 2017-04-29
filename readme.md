@@ -42,8 +42,8 @@ You will need the following things set up and installed on your machine:
 
 ## Initial Setup Steps
 Overview of steps:
- * Create a new VSTS account (or new project if you already have an account)
- * If you've never run git before, run these commands (modifying with your details as required):
+* Create a new VSTS account, or new project if you already have an account
+* If you've never run git before, run these commands (modifying with your details as required):
  ```
 git config --global user.email "your-email@example.com"
 git config --global user.name "Your Name"
@@ -56,7 +56,7 @@ git config --global credential.helper manager
 With all the setup pre-reqs complete, what follows is the full step by step guide to the exercise 
 
 ## 1. Create Node.js / Express web app
-We'll use the well know [Express](https://expressjs.com/) web framework for Node.js, and it's builtin generator to create a skeleton application.   
+We'll use the well known [Express](https://expressjs.com/) web framework for Node.js, and its builtin generator to create a skeleton application.   
 Open a command prompt or terminal and run the following commands:
 ```bash
 npm install express-generator -g
@@ -79,7 +79,7 @@ npm start
 ```
 This will start the Node/Express app + webserver which will be listening on port 3000, so open [`http://localhost:3000`](http://localhost:3000) in your browser to see your app.  
 
-Looks pretty dull eh? It's not the most exciting starting page for sure. If you go back to VS Code and open ***views/index.pug*** you can change what your app shows. This file is a view layout in a format called 'Pug', which has a special format like a very minimal HTML, you can find out the basics [here](https://www.sitepoint.com/jade-tutorial-for-beginners/). This is an example:
+Looks pretty dull eh? It's not the most exciting starting page for sure. If you go back to VS Code and open ***views/index.pug*** you can change what your app shows. This file is a view layout in a format called 'Pug', which has a special syntax like very minimal HTML, you can find out the basics [here](https://www.sitepoint.com/jade-tutorial-for-beginners/). This is an example:
 ```pug
 extends layout
 
@@ -90,22 +90,23 @@ block content
   button OK Great!
 ```
 Any changes to Pug views are picked up without needing to restart Node, so just refresh the browser.  
-How much you want to personalize and tweak it from here is up to you. If you know CSS then some quick edits to ***public/stylesheets/style.css*** can make things less of an eyesore.  
+How much you want to personalize and tweak it from here is up to you. If you know CSS then some quick edits to ***public/stylesheets/style.css*** can make things much less of an eyesore.  
 
-Once you you're happy move on to the next step, press `Ctrl+C` in your VS Code terminal to stop Node from running.
+Once you're happy to move on to the next step, press `Ctrl+C` in your VS Code terminal to stop Node from running.
 
 
 ## 2. Containerize the app 
-Now we'll add Docker support to the app to containerize it. The Docker extension for VS Code makes this super easy.  
-* Press `Ctrl+Shift+P` then type "docker"
-* Select 'Add docker files to workspace'
-* Choose 'Node.js' for application platform
-* Choose '3000' for the port (no quotes)
+Now we'll add Docker support to the app to containerize it. The Docker extension for VS Code makes this super easy:   
+* Press `Ctrl+Shift+P` then type *"docker"*
+* Select **'Add docker files to workspace'**
+* Choose **'Node.js'** for application platform
+* Choose **'3000'** for the port (no quotes)
 
-This will add three files to your project, the two compose YAML files we can ignore. The **Dockerfile** is what we're interested in. We don't need to make any changes but if you're unfamiliar with Docker, it's worth opening and looking at, if you've created Docker images before, then move on. Some explanation of the **DockerFile**:  
-- Since, a Docker image is nothing but a series of layers built on top of each other, you nearly always start from a base image. The `FROM` command sets the base image, here we're using an image pre-built with Node.js. This is an official image published by the Node foundation and [hosted on Dockerhub](https://hub.docker.com/_/node/).  
+This will add three files to your project, the two compose YAML files we can ignore. The **Dockerfile** is what we're interested in. We don't need to make any changes but if you're unfamiliar with Docker, it's worth opening and looking at, if you've created Docker images before, then move on.  
+Here is some high level explanation of what the **Dockerfile** is doing:  
+- Since, a Docker image is nothing but a series of layers built on top of each other, you always start from a base image. The `FROM` command sets this base image, here we're using an image pre-built with Node.js. This is an official image published by the Node foundation and [hosted on Dockerhub](https://hub.docker.com/_/node/).  
 - The series of `COPY` and `RUN` commands go about running the `npm install` just as we did earlier and also copying in your app source into the image.  
-- The `EXPOSE` command is a hint which ports your application and will be listening on and need to be mapped out to the container when it runs.  
+- The `EXPOSE` command is a hint which ports your application and will be listening on, and need to be mapped out to the container when it runs.  
 - The last `CMD` part is what starts the app up, just as we did with `npm start`.  
 
 
@@ -119,7 +120,7 @@ git commit -m "First commit"
 To get the code up into VSTS, go into your new project and we'll need to set the remote origin for the repo and push it.  
 > Note. You will get the correct URL & syntax for this part by expanding the *"push an existing repository from command line"* section of the project start page or from the 'code' section in VSTS
 ```
-git remote add origin https://{vsts_account}.visualstudio.com/_git/{project}
+git remote add origin https://<vsts-account>.visualstudio.com/_git/<project>
 git push -u origin --all
 ```
 If you have the git credential manager installed, authentication should should automatically pop up, so login with your VSTS account details.  
@@ -129,17 +130,18 @@ You can validate this has worked by looking to the 'Code' section on the main VS
 
 
 ## 4. Deploy resources to Azure
-Switching from VSTS to Azure for a moment, we'll set about creating the cloud resources we need to support our application and release pipeline. We'll do this by deploying a template, also called an ARM (Azure Resource Manager) template. This template is a json file that describes all the resources to be built, and any input parameters we want to supply. This template has been created for you and will deploy into Azure:
+Switching from VSTS to Azure for a moment, we'll set about creating the cloud resources we need to support our application and release pipeline. We'll do this by deploying a template, called an ARM (Azure Resource Manager) template. This template is a JSON file that describes all the resources to be built, and any input parameters we want to supply. This template has been created for you and will deploy into Azure:
 * Azure Container Registry
 * Linux App Service Plan
 * Linux Web App
 * Storage Account
 
-There are many ways to deploy this template, but we'll use a simple "Deploy to Azure" button and URL. Go into the [Azure folder under this repository](azure/) and you should see a page with big blue button which will jump into the Azure portal ready to deploy our template. You will be prompted for a number of things: 
+There are many ways to deploy this template, but we'll use a simple "Deploy to Azure" button. Go into the [Azure folder under this repository](azure/) and you should see a page with big blue button which will jump into the Azure portal ready to deploy our template. You will be prompted for a number of things: 
 * *Resource group* - This group will hold all your resources. Choose any name you like
 * *Location* - Pick a local Azure region e.g. North or West Europe or one of the UK regions
-* *Site Name* - This is the name of your new site and Linux web app, :warning: Important! Pick a globally unique name as this site will be registered in global DNS. Suggestion, to use your initials and/or date, e.g. *`node-demo-bc-1204`*
-* *Registry Name* - This is the name of your new Docker registry, same as above *must be a globally unique name!* and only use letters and numbers
+* *Site Name* - This is the name of your new site and Linux web app
+  :warning: Important! **Pick a globally unique name** as this site will be registered in global DNS. Suggestion, to use your initials and/or date, e.g. *`mysitebenc-1204`*
+* *Registry Name* - This is the name of your new Docker registry, same as above *must be a globally unique name!* and **only use letters and numbers**
 * *Docker Image Name* - Leave this as `myapp` for now
 * *Docker Image Port* - Leave this as `3000` for now
 
@@ -214,7 +216,7 @@ OK the part we've been waiting for... assuming your build and release are workin
 
 Note. Be patent! As the very first time the site loads Azure will start & deploy the underlying Docker container, which can take a minute or two. So be prepared to wait & refresh once or twice. If you get a permanent 503 error then something has gone wrong and Azure can't start your container.  
 
-To test the end to end automated CI/CD process, go back to you app in VS Code, make a small change to **views/index.pug** just put in some extra text or whatever you like. Then in the VS Code source code view (3rd icon from top on the far right) commit your change with a comment, then click the '…' and pick 'Push' to push this change into VSTS.  
+To test the end to end automated CI/CD process, go back to you app in VS Code, make a small change to ***views/index.pug*** just put in some extra text or whatever you like. Then in the VS Code source code view (3rd icon from top on the far right) commit your change with a comment, then click the '…' and pick 'Push' to push this change into VSTS.  
 This in turn should trigger the build to run (CI), then when that completes it will trigger the release (CD) and update the site with your changed code.  
 Job done!  
 
