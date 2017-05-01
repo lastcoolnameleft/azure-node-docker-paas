@@ -11,7 +11,8 @@ router.get('/', function (req, res, next) {
     cpus: os.cpus(), 
     hostname: os.hostname(), 
     arch: os.arch(),
-    mem: os.totalmem()
+    mem: os.totalmem(),
+    env: process.env.WEBSITE_SITE_NAME ? process.env.WEBSITE_SITE_NAME.split('-')[0] : 'Local'
   }
 
   res.render('index', { title: 'Azure Demo App', info: info, isDocker: fs.existsSync('/.dockerenv') });

@@ -20,8 +20,11 @@ block content
     tr
       td Memory: 
       td #{Math.round(info.mem/(1024*1024))} Mb
+    tr
+      td Environment: 
+      td #{info.env}     
   if isDocker
-    h3 Status: Running in a Docker container! &#x1F604; &#x2615; 
+    h3 Status: Running in a Docker container! &#x1F604; 
   else
     h3 Status: <b>Not</b> running as a Docker container &#x1F622;
   hr
@@ -44,7 +47,8 @@ router.get('/', function (req, res, next) {
     cpus: os.cpus(), 
     hostname: os.hostname(), 
     arch: os.arch(),
-    mem: os.totalmem()
+    mem: os.totalmem(),
+    env: process.env.WEBSITE_SITE_NAME ? process.env.WEBSITE_SITE_NAME.split('-')[0] : 'Local'
   }
 
   res.render('index', { title: 'Azure Demo App', info: info, isDocker: fs.existsSync('/.dockerenv') });
