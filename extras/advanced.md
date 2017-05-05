@@ -7,8 +7,8 @@ In this version of the flow, skip step 4 completely, but instead create an ACR i
 
 Create an ACR instance using Azure CLI v2. [Install instructions](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)  
 ```
-az group create -n MyResGroup -l westeurope
-az acr create --admin-enabled --sku Basic --verbose -l westeurope -n demoregfoo123 -g MyResGroup 
+az group create -l westus -n MyResGroup 
+az acr create --admin-enabled --sku Basic --verbose -l westus -n demoregfoo123 -g MyResGroup 
 ```
 
 ### VSTS release defintion - Infrastructure as Code 
