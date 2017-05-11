@@ -59,7 +59,7 @@ We'll use the well known [Express](https://expressjs.com/) web framework for Nod
 Open a command prompt or terminal and run the following commands:
 ```bash
 npm install express-generator -g
-express --view=pug myapp
+express --view=pug --git myapp
 cd myapp
 npm install
 ```
