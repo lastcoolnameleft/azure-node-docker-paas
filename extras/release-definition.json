@@ -105,7 +105,7 @@
                             "inputs": {
                                 "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
                                 "action": "Create Or Update Resource Group",
-                                "resourceGroupName": "NodeDemo-$(Release.EnvironmentName)",
+                                "resourceGroupName": "OSS.Demo.NodeApp.Release",
                                 "location": "West Europe",
                                 "templateLocation": "URL of the file",
                                 "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
@@ -249,7 +249,7 @@
                             "inputs": {
                                 "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
                                 "action": "Create Or Update Resource Group",
-                                "resourceGroupName": "NodeDemo-$(Release.EnvironmentName)",
+                                "resourceGroupName": "OSS.Demo.NodeApp.Release",
                                 "location": "West Europe",
                                 "templateLocation": "URL of the file",
                                 "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
@@ -393,7 +393,7 @@
                             "inputs": {
                                 "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
                                 "action": "Create Or Update Resource Group",
-                                "resourceGroupName": "NodeDemo-$(Release.EnvironmentName)",
+                                "resourceGroupName": "OSS.Demo.NodeApp.Release",
                                 "location": "West Europe",
                                 "templateLocation": "URL of the file",
                                 "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
