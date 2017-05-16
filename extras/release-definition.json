@@ -2,7 +2,7 @@
     "source": 2,
     "id": 10,
     "revision": 22,
-    "name": "Release App to Azure",
+    "name": "Release MyApp to Azure",
     "createdBy": {
         "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
         "displayName": "Ben Coleman",
@@ -23,7 +23,7 @@
     "path": "\\",
     "variables": {
         "sitename": {
-            "value": "$(Release.EnvironmentName)-bcnode-demo"
+            "value": "$(Release.EnvironmentName)-nodedemo"
         },
         "registry": {
             "value": "!changeme!"
@@ -96,7 +96,7 @@
                         {
                             "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
                             "version": "2.*",
-                            "name": "Azure Deployment",
+                            "name": "Deploy Azure Template",
                             "enabled": true,
                             "alwaysRun": false,
                             "continueOnError": false,
@@ -105,8 +105,8 @@
                             "inputs": {
                                 "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
                                 "action": "Create Or Update Resource Group",
-                                "resourceGroupName": "OSS.Demo.NodeApp.Release",
-                                "location": "West Europe",
+                                "resourceGroupName": "Deployments.MyApp",
+                                "location": "West US",
                                 "templateLocation": "URL of the file",
                                 "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
                                 "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
@@ -124,7 +124,7 @@
                         {
                             "taskId": "f045e430-8704-11e6-968f-e717e6411619",
                             "version": "0.*",
-                            "name": "Restart Azure App Service",
+                            "name": "Restart Web App",
                             "enabled": true,
                             "alwaysRun": false,
                             "continueOnError": false,
@@ -187,7 +187,7 @@
         },
         {
             "id": 21,
-            "name": "Test",
+            "name": "Staging",
             "rank": 2,
             "owner": {
                 "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
@@ -240,7 +240,7 @@
                         {
                             "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
                             "version": "2.*",
-                            "name": "Azure Deployment",
+                            "name": "Deploy Azure Template",
                             "enabled": true,
                             "alwaysRun": false,
                             "continueOnError": false,
@@ -249,8 +249,8 @@
                             "inputs": {
                                 "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
                                 "action": "Create Or Update Resource Group",
-                                "resourceGroupName": "OSS.Demo.NodeApp.Release",
-                                "location": "West Europe",
+                                "resourceGroupName": "Deployments.MyApp",
+                                "location": "West US",
                                 "templateLocation": "URL of the file",
                                 "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
                                 "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
@@ -268,7 +268,7 @@
                         {
                             "taskId": "f045e430-8704-11e6-968f-e717e6411619",
                             "version": "0.*",
-                            "name": "Restart Azure App Service",
+                            "name": "Restart Web App",
                             "enabled": true,
                             "alwaysRun": false,
                             "continueOnError": false,
@@ -331,7 +331,7 @@
         },
         {
             "id": 22,
-            "name": "Staging",
+            "name": "PreProd",
             "rank": 3,
             "owner": {
                 "id": "81613f75-f6e3-49cb-abdf-ff2ba28a0d03",
@@ -384,7 +384,7 @@
                         {
                             "taskId": "94a74903-f93f-4075-884f-dc11f34058b4",
                             "version": "2.*",
-                            "name": "Azure Deployment",
+                            "name": "Deploy Azure Template",
                             "enabled": true,
                             "alwaysRun": false,
                             "continueOnError": false,
@@ -393,8 +393,8 @@
                             "inputs": {
                                 "ConnectedServiceName": "1cef8f29-21aa-40ad-b32d-4daaa7bc4689",
                                 "action": "Create Or Update Resource Group",
-                                "resourceGroupName": "OSS.Demo.NodeApp.Release",
-                                "location": "West Europe",
+                                "resourceGroupName": "Deployments.MyApp",
+                                "location": "West US",
                                 "templateLocation": "URL of the file",
                                 "csmFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.json",
                                 "csmParametersFileLink": "https://raw.githubusercontent.com/benc-uk/azure-arm/master/paas-web/webapp-linux-custom/azuredeploy.parameters.json",
@@ -412,7 +412,7 @@
                         {
                             "taskId": "f045e430-8704-11e6-968f-e717e6411619",
                             "version": "0.*",
-                            "name": "Restart Azure App Service",
+                            "name": "Restart Web App",
                             "enabled": true,
                             "alwaysRun": false,
                             "continueOnError": false,
