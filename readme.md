@@ -200,8 +200,9 @@ Our release process is slightly unorthodox, as for simplicity we've pre-deployed
 On main menu click into *Build & Release --> Releases*:
 * Click **'+ New Definition'**
 * Pick **'Start with an empty definition'**
-* Click the pencil at the top and rename the defintion something sensible e.g. *"Release to Azure"*
 * Pick your project & new build defintion as the source, and also enable **'Continuous deployment'** checkbox
+* Click **'Create'**
+* Click the pencil at the top and rename the defintion something sensible e.g. *"Release to Azure"*
 * Click **'Add tasks'** and add the **'Azure App Service Manage (PREVIEW)'** task, click **'Close'**
 * Change the following options:
   * Azure subscription: pick from the drop down
